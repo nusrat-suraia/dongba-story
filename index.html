@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>东巴家训 - 纳西族人的春节</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: #1a1a2e;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        .container {
+            height: 100vh;
+            width: 100vw;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .page {
+            height: 100vh;
+            width: 100vw;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 24px;
+            text-align: center;
+            color: #f5f0e8;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-cover {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+        .page-1 {
+            background: linear-gradient(135deg, #2d1b1b 0%, #4a2c2c 50%, #2d1b1b 100%);
+        }
+        .page-2 {
+            background: linear-gradient(135deg, #1a2e1a 0%, #2c4a2c 50%, #1a2e1a 100%);
+        }
+        .page-3 {
+            background: linear-gradient(135deg, #2e1a0f 0%, #4a2c1a 50%, #2e1a0f 100%);
+        }
+        .page-4 {
+            background: linear-gradient(135deg, #1a1a2e 0%, #2d1b3d 50%, #1a1a2e 100%);
+        }
+
+        .page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(255,215,0,0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(255,215,0,0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.3);
+            font-size: 12px;
+            animation: bounce 2s infinite;
+            letter-spacing: 2px;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-8px); }
+        }
+
+        .cover-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #f5d742;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 20px rgba(245, 215, 66, 0.2);
+            letter-spacing: 4px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover-subtitle {
+            font-size: 16px;
+            color: rgba(245, 240, 232, 0.7);
+            letter-spacing: 6px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+            line-height: 1.8;
+        }
+
+        .cover-decoration {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #f5d742, transparent);
+            margin: 8px auto 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-begin {
+            background: linear-gradient(135deg, #f5d742, #e6b800);
+            color: #1a1a2e;
+            border: none;
+            padding: 16px 60px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            letter-spacing: 6px;
+            transition: all 0.3s;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 4px 30px rgba(245, 215, 66, 0.3);
+        }
+
+        .btn-begin:active {
+            transform: scale(0.95);
+        }
+
+        .scene-label {
+            font-size: 13px;
+            color: rgba(245, 215, 66, 0.6);
+            letter-spacing: 8px;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+            text-transform: uppercase;
+        }
+
+        .video-wrapper {
+            width: 100%;
+            max-width: 400px;
+            aspect-ratio: 16/9;
+            background: rgba(0,0,0,0.4);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .video-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.3);
+            font-size: 14px;
+            background: rgba(0,0,0,0.3);
+        }
+
+        .main-text {
+            font-size: 17px;
+            line-height: 1.9;
+            color: #f5f0e8;
+            max-width: 400px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+            animation-delay: 0.3s;
+            letter-spacing: 1px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .btn-popup {
+            background: transparent;
+            color: #f5d742;
+            border: 1.5px solid rgba(245, 215, 66, 0.4);
+            padding: 10px 32px;
+            font-size: 14px;
+            border-radius: 30px;
+            cursor: pointer;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+            position: relative;
+            z-index: 1;
+            background: rgba(245, 215, 66, 0.05);
+        }
+
+        .btn-popup:active {
+            background: rgba(245, 215, 66, 0.15);
+            transform: scale(0.95);
+        }
+
+        .ending-text {
+            font-size: 18px;
+            line-height: 2.2;
+            color: #f5f0e8;
+            max-width: 380px;
+            position: relative;
+            z-index: 1;
+            letter-spacing: 2px;
+        }
+
+        .ending-text .line {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .ending-text .line:nth-child(1) { animation-delay: 0.3s; }
+        .ending-text .line:nth-child(2) { animation-delay: 0.8s; }
+        .ending-text .line:nth-child(3) { animation-delay: 1.3s; }
+
+        .ending-divider {
+            width: 40px;
+            height: 2px;
+            background: rgba(245, 215, 66, 0.3);
+            margin: 16px auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #2d2d44, #1a1a2e);
+            border-radius: 16px;
+            padding: 30px 28px;
+            max-width: 420px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 1px solid rgba(245, 215, 66, 0.15);
+            position: relative;
+            animation: modalIn 0.3s ease;
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .modal-title {
+            color: #f5d742;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+        }
+
+        .modal-divider {
+            width: 30px;
+            height: 2px;
+            background: rgba(245, 215, 66, 0.3);
+            margin-bottom: 16px;
+        }
+
+        .modal-body {
+            color: rgba(245, 240, 232, 0.85);
+            font-size: 15px;
+            line-height: 1.9;
+            letter-spacing: 0.5px;
+        }
+
+        .modal-body .source {
+            margin-top: 14px;
+            font-size: 13px;
+            color: rgba(245, 215, 66, 0.5);
+            font-style: italic;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            color: rgba(255,255,255,0.4);
+            font-size: 24px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: color 0.3s;
+        }
+
+        .modal-close:active {
+            color: #fff;
+        }
+
+        .container::-webkit-scrollbar {
+            display: none;
+        }
+        .container {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        @media (max-width: 380px) {
+            .cover-title { font-size: 26px; }
+            .main-text { font-size: 15px; }
+            .ending-text { font-size: 16px; }
+            .modal-content { padding: 24px 20px; }
+        }
+
+        @media (min-width: 600px) {
+            .page { padding: 40px 60px; }
+            .cover-title { font-size: 42px; }
+            .main-text { font-size: 20px; max-width: 500px; }
+            .video-wrapper { max-width: 500px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="modal-overlay" id="modal">
+    <div class="modal-content">
+        <button class="modal-close" id="modalClose">✕</button>
+        <div class="modal-title" id="modalTitle">典籍原文</div>
+        <div class="modal-divider"></div>
+        <div class="modal-body" id="modalBody">
+            <p id="modalScripture">原文内容</p>
+            <p id="modalInterpretation" style="margin-top:12px; color:rgba(245,215,66,0.7);"></p>
+            <div class="source" id="modalSource">—— 和志武《纳西学论集》</div>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="container">
+
+    <div class="page page-cover">
+        <div class="cover-title">《东巴家训》</div>
+        <div class="cover-decoration"></div>
+        <div class="cover-subtitle">纳西族人的春节<br>东巴经中的家庭伦理智慧与当代传承</div>
+        <button class="btn-begin" onclick="goToPage(1)">开始探索</button>
+        <div class="scroll-hint">⬇ 滑动翻页 ⬇</div>
+    </div>
+
+    <div class="page page-1" id="page1">
+        <div class="scene-label">— 祭天敬老 —</div>
+        <div class="video-wrapper">
+            <div class="video-placeholder" id="videoPlaceholder1">🎬 视频待上传</div>
+            <video id="video1" muted playsinline style="display:none;"></video>
+        </div>
+        <p class="main-text">东巴经里说，祭完天，先请老人尝头道酒。敬天，就是敬老。老人，是家里最先坐下的人。</p>
+        <button class="btn-popup" onclick="openModal(1)">点击查看典籍原文</button>
+        <div class="scroll-hint">⬇ 滑动翻页 ⬇</div>
+    </div>
+
+    <div class="page page-2" id="page2">
+        <div class="scene-label">— 除秽迎新 —</div>
+        <div class="video-wrapper">
+            <div class="video-placeholder" id="videoPlaceholder2">🎬 视频待上传</div>
+            <video id="video2" muted playsinline style="display:none;"></video>
+        </div>
+        <p class="main-text">东巴经里说，不除秽，天神不享福。扫去旧年的灰尘，才能干干净净迎接新年。</p>
+        <button class="btn-popup" onclick="openModal(2)">点击查看典籍原文</button>
+        <div class="scroll-hint">⬇ 滑动翻页 ⬇</div>
+    </div>
+
+    <div class="page page-3" id="page3">
+        <div class="scene-label">— 烧天香祈福 —</div>
+        <div class="video-wrapper">
+            <div class="video-placeholder" id="videoPlaceholder3">🎬 视频待上传</div>
+            <video id="video3" muted playsinline style="display:none;"></video>
+        </div>
+        <p class="main-text">东巴经里说，向天地祭天香，愿家庭平安兴旺。一缕青烟，把愿望送到神灵耳边。</p>
+        <button class="btn-popup" onclick="openModal(3)">点击查看典籍原文</button>
+        <div class="scroll-hint">⬇ 滑动翻页 ⬇</div>
+    </div>
+
+    <div class="page page-4">
+        <div class="ending-text">
+            <div class="line">这些不是古书里的字。</div>
+            <div class="ending-divider"></div>
+            <div class="line">这是一个纳西族人的春节。</div>
+            <div class="ending-divider"></div>
+            <div class="line">也是东巴经活着的每一天。</div>
+        </div>
+        <div style="position:absolute; bottom:30px; left:0; right:0; text-align:center; color:rgba(255,255,255,0.15); font-size:12px; letter-spacing:4px; z-index:1;">
+            东巴家训 · 纳西族人的春节
+        </div>
+    </div>
+
+</div>
+
+<script>
+    const pageData = {
+        1: {
+            title: '祭天敬老 · 典籍原文',
+            scripture: 'Original text 1 - 待教授补充',
+            interpretation: 'Interpretation 1 - 待教授补充',
+            source: '和志武《纳西学论集》'
+        },
+        2: {
+            title: '除秽迎新 · 典籍原文',
+            scripture: 'Original text 2 - 待教授补充',
+            interpretation: 'Interpretation 2 - 待教授补充',
+            source: '杨福泉《东巴文献及其当代释读刊布和创新》'
+        },
+        3: {
+            title: '烧天香祈福 · 典籍原文',
+            scripture: 'Original text 3 - 待教授补充',
+            interpretation: 'Interpretation 3 - 待教授补充',
+            source: '和志武《纳西学论集》'
+        }
+    };
+
+    function openModal(pageNum) {
+        const data = pageData[pageNum];
+        if (!data) return;
+
+        document.getElementById('modalTitle').textContent = data.title;
+        document.getElementById('modalScripture').textContent = data.scripture;
+        document.getElementById('modalInterpretation').textContent = data.interpretation;
+        document.getElementById('modalSource').textContent = '—— ' + data.source;
+
+        document.getElementById('modal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        document.getElementById('modal').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    document.getElementById('modal').addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+    });
+
+    function goToPage(pageNum) {
+        const container = document.getElementById('container');
+        const pages = container.querySelectorAll('.page');
+        if (pages[pageNum]) {
+            pages[pageNum].scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
+    function loadVideo(pageNum, videoFile) {
+        const video = document.getElementById('video' + pageNum);
+        const placeholder = document.getElementById('videoPlaceholder' + pageNum);
+        if (video && videoFile) {
+            video.src = videoFile;
+            video.style.display = 'block';
+            placeholder.style.display = 'none';
+            video.play().catch(function() {});
+        }
+    }
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            const video = entry.target.querySelector('video');
+            if (video && entry.isIntersecting) {
+                video.play().catch(function() {});
+            } else if (video) {
+                video.pause();
+            }
+        });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.page').forEach(function(page) {
+        observer.observe(page);
+    });
+
+    console.log('✅ 东巴家训 H5 已加载！');
+</script>
+
+</body>
+</html>
