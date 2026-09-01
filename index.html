@@ -178,6 +178,7 @@
             position: relative;
             z-index: 1;
             border: 2px solid rgba(255,255,255,0.1);
+            cursor: pointer;
         }
 
         .video-wrapper video {
@@ -426,6 +427,21 @@
             scrollbar-width: none;
         }
 
+        /* ===== SOUND HINT ===== */
+        .sound-hint {
+            position: absolute;
+            bottom: 58px;
+            right: 12px;
+            z-index: 9;
+            color: rgba(255,255,255,0.3);
+            font-size: 10px;
+            background: rgba(0,0,0,0.4);
+            padding: 2px 8px;
+            border-radius: 10px;
+            letter-spacing: 1px;
+            font-family: "楷体", "KaiTi", serif;
+        }
+
         @media (max-width: 380px) {
             .cover-title { font-size: 32px; }
             .cover-subtitle { font-size: 16px; }
@@ -479,12 +495,13 @@
     <!-- PAGE 1 -->
     <div class="page page-1" id="page1">
         <div class="scene-label">— 祭天敬老 —</div>
-        <div class="video-wrapper" id="videoWrapper1">
+        <div class="video-wrapper" id="videoWrapper1" onclick="toggleVideoSound(1)">
             <div class="video-placeholder" id="videoPlaceholder1">🎬 视频待上传</div>
             <video id="video1" muted playsinline style="display:none;"></video>
-            <button class="sound-toggle" id="soundToggle1" onclick="toggleSound(1)" style="display:none;">
+            <button class="sound-toggle" id="soundToggle1" onclick="event.stopPropagation(); toggleSound(1)" style="display:none;">
                 🔇
             </button>
+            <div class="sound-hint" id="soundHint1" style="display:none;">点击视频开启声音</div>
         </div>
         <p class="main-text">东巴经里说，祭完天，先请老人尝头道酒。敬天，就是敬老。老人，是家里最先坐下的人。</p>
         <div class="btn-popup-wrapper">
@@ -496,12 +513,13 @@
     <!-- PAGE 2 -->
     <div class="page page-2" id="page2">
         <div class="scene-label">— 除秽迎新 —</div>
-        <div class="video-wrapper" id="videoWrapper2">
+        <div class="video-wrapper" id="videoWrapper2" onclick="toggleVideoSound(2)">
             <div class="video-placeholder" id="videoPlaceholder2">🎬 视频待上传</div>
             <video id="video2" muted playsinline style="display:none;"></video>
-            <button class="sound-toggle" id="soundToggle2" onclick="toggleSound(2)" style="display:none;">
+            <button class="sound-toggle" id="soundToggle2" onclick="event.stopPropagation(); toggleSound(2)" style="display:none;">
                 🔇
             </button>
+            <div class="sound-hint" id="soundHint2" style="display:none;">点击视频开启声音</div>
         </div>
         <p class="main-text">东巴经里说，不除秽，天神不享福。扫去旧年的灰尘，才能干干净净迎接新年。</p>
         <div class="btn-popup-wrapper">
@@ -513,12 +531,13 @@
     <!-- PAGE 3 -->
     <div class="page page-3" id="page3">
         <div class="scene-label">— 烧天香祈福 —</div>
-        <div class="video-wrapper" id="videoWrapper3">
+        <div class="video-wrapper" id="videoWrapper3" onclick="toggleVideoSound(3)">
             <div class="video-placeholder" id="videoPlaceholder3">🎬 视频待上传</div>
             <video id="video3" muted playsinline style="display:none;"></video>
-            <button class="sound-toggle" id="soundToggle3" onclick="toggleSound(3)" style="display:none;">
+            <button class="sound-toggle" id="soundToggle3" onclick="event.stopPropagation(); toggleSound(3)" style="display:none;">
                 🔇
             </button>
+            <div class="sound-hint" id="soundHint3" style="display:none;">点击视频开启声音</div>
         </div>
         <p class="main-text">东巴经里说，向天地祭天香，愿家庭平安兴旺。一缕青烟，把愿望送到神灵耳边。</p>
         <div class="btn-popup-wrapper">
@@ -566,24 +585,56 @@
         }
     };
 
-    // ===== SOUND TOGGLE FUNCTION =====
+    // ===== SOUND FUNCTIONS =====
+    // When user taps the sound button
     function toggleSound(pageNum) {
         const video = document.getElementById('video' + pageNum);
         const toggle = document.getElementById('soundToggle' + pageNum);
+        const hint = document.getElementById('soundHint' + pageNum);
         
         if (video.muted) {
+            // Try to unmute
             video.muted = false;
-            toggle.textContent = '🔊';
-            // Try to play with sound
-            video.play().catch(function(e) {
-                // If browser blocks, show message
-                alert('请先点击视频播放，然后打开声音 (Please tap the video first to enable sound)');
+            video.play().then(function() {
+                // Success - sound is on
+                toggle.textContent = '🔊';
+                hint.style.display = 'none';
+            }).catch(function() {
+                // Browser blocked it - show hint to tap video
                 video.muted = true;
                 toggle.textContent = '🔇';
+                hint.style.display = 'block';
+                // Hide hint after 3 seconds
+                setTimeout(function() {
+                    hint.style.display = 'none';
+                }, 3000);
             });
         } else {
+            // Mute the video
             video.muted = true;
             toggle.textContent = '🔇';
+            hint.style.display = 'none';
+        }
+    }
+
+    // When user taps the video itself
+    function toggleVideoSound(pageNum) {
+        const video = document.getElementById('video' + pageNum);
+        const toggle = document.getElementById('soundToggle' + pageNum);
+        const hint = document.getElementById('soundHint' + pageNum);
+        
+        if (video) {
+            // Toggle mute state
+            video.muted = !video.muted;
+            if (video.muted) {
+                toggle.textContent = '🔇';
+                hint.style.display = 'none';
+            } else {
+                toggle.textContent = '🔊';
+                hint.style.display = 'none';
+                // Try to play with sound
+                video.play().catch(function() {});
+            }
         }
     }
 
@@ -639,13 +690,15 @@
         const video = document.getElementById('video' + pageNum);
         const placeholder = document.getElementById('videoPlaceholder' + pageNum);
         const toggle = document.getElementById('soundToggle' + pageNum);
+        const hint = document.getElementById('soundHint' + pageNum);
         
         if (video && videoFile) {
             video.src = videoFile;
             video.style.display = 'block';
             placeholder.style.display = 'none';
             toggle.style.display = 'flex';
-            video.muted = true; // Start muted
+            hint.style.display = 'none';
+            video.muted = true;
             video.play().catch(function() {});
         }
     }
@@ -672,10 +725,7 @@
     });
 
     console.log('✅ 东巴家训 H5 已加载！');
-    console.log('✅ 背景图片: background-pattern.png (Cover + Ending)');
-    console.log('✅ 滚动背景: page-bg.jpg (Pages 1, 2, 3)');
-    console.log('✅ 视频已加载: Video1.mp4, Video2.mp4, Video3.mp4');
-    console.log('✅ 声音按钮: 点击 🔇 可开启/关闭声音');
+    console.log('✅ 声音控制: 点击视频或🔇按钮切换声音');
 </script>
 
 </body>
