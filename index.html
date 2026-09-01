@@ -70,7 +70,6 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            /* NO background-attachment: fixed - this makes it scroll! */
         }
         .page-1::before, .page-2::before, .page-3::before {
             content: '';
@@ -197,6 +196,33 @@
             font-size: 18px;
             background: rgba(0,0,0,0.3);
             font-family: "楷体", "KaiTi", serif;
+        }
+
+        /* ===== SOUND TOGGLE BUTTON ===== */
+        .sound-toggle {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            color: #ffffff;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+
+        .sound-toggle:active {
+            transform: scale(0.9);
+            background: rgba(255, 255, 255, 0.2);
         }
 
         /* ===== MAIN TEXT ===== */
@@ -409,6 +435,7 @@
             .modal-content { padding: 20px 16px; }
             .btn-begin { font-size: 18px; padding: 12px 40px; height: 50px; }
             .btn-popup { font-size: 16px; height: 44px; }
+            .sound-toggle { width: 34px; height: 34px; font-size: 14px; }
         }
 
         @media (min-width: 600px) {
@@ -452,9 +479,12 @@
     <!-- PAGE 1 -->
     <div class="page page-1" id="page1">
         <div class="scene-label">— 祭天敬老 —</div>
-        <div class="video-wrapper">
+        <div class="video-wrapper" id="videoWrapper1">
             <div class="video-placeholder" id="videoPlaceholder1">🎬 视频待上传</div>
             <video id="video1" muted playsinline style="display:none;"></video>
+            <button class="sound-toggle" id="soundToggle1" onclick="toggleSound(1)" style="display:none;">
+                🔇
+            </button>
         </div>
         <p class="main-text">东巴经里说，祭完天，先请老人尝头道酒。敬天，就是敬老。老人，是家里最先坐下的人。</p>
         <div class="btn-popup-wrapper">
@@ -466,9 +496,12 @@
     <!-- PAGE 2 -->
     <div class="page page-2" id="page2">
         <div class="scene-label">— 除秽迎新 —</div>
-        <div class="video-wrapper">
+        <div class="video-wrapper" id="videoWrapper2">
             <div class="video-placeholder" id="videoPlaceholder2">🎬 视频待上传</div>
             <video id="video2" muted playsinline style="display:none;"></video>
+            <button class="sound-toggle" id="soundToggle2" onclick="toggleSound(2)" style="display:none;">
+                🔇
+            </button>
         </div>
         <p class="main-text">东巴经里说，不除秽，天神不享福。扫去旧年的灰尘，才能干干净净迎接新年。</p>
         <div class="btn-popup-wrapper">
@@ -480,9 +513,12 @@
     <!-- PAGE 3 -->
     <div class="page page-3" id="page3">
         <div class="scene-label">— 烧天香祈福 —</div>
-        <div class="video-wrapper">
+        <div class="video-wrapper" id="videoWrapper3">
             <div class="video-placeholder" id="videoPlaceholder3">🎬 视频待上传</div>
             <video id="video3" muted playsinline style="display:none;"></video>
+            <button class="sound-toggle" id="soundToggle3" onclick="toggleSound(3)" style="display:none;">
+                🔇
+            </button>
         </div>
         <p class="main-text">东巴经里说，向天地祭天香，愿家庭平安兴旺。一缕青烟，把愿望送到神灵耳边。</p>
         <div class="btn-popup-wrapper">
@@ -529,6 +565,27 @@
             source: '和志武《纳西学论集》'
         }
     };
+
+    // ===== SOUND TOGGLE FUNCTION =====
+    function toggleSound(pageNum) {
+        const video = document.getElementById('video' + pageNum);
+        const toggle = document.getElementById('soundToggle' + pageNum);
+        
+        if (video.muted) {
+            video.muted = false;
+            toggle.textContent = '🔊';
+            // Try to play with sound
+            video.play().catch(function(e) {
+                // If browser blocks, show message
+                alert('请先点击视频播放，然后打开声音 (Please tap the video first to enable sound)');
+                video.muted = true;
+                toggle.textContent = '🔇';
+            });
+        } else {
+            video.muted = true;
+            toggle.textContent = '🔇';
+        }
+    }
 
     // ===== OPEN MODAL =====
     function openModal(pageNum) {
@@ -581,10 +638,14 @@
     function loadVideo(pageNum, videoFile) {
         const video = document.getElementById('video' + pageNum);
         const placeholder = document.getElementById('videoPlaceholder' + pageNum);
+        const toggle = document.getElementById('soundToggle' + pageNum);
+        
         if (video && videoFile) {
             video.src = videoFile;
             video.style.display = 'block';
             placeholder.style.display = 'none';
+            toggle.style.display = 'flex';
+            video.muted = true; // Start muted
             video.play().catch(function() {});
         }
     }
@@ -614,6 +675,7 @@
     console.log('✅ 背景图片: background-pattern.png (Cover + Ending)');
     console.log('✅ 滚动背景: page-bg.jpg (Pages 1, 2, 3)');
     console.log('✅ 视频已加载: Video1.mp4, Video2.mp4, Video3.mp4');
+    console.log('✅ 声音按钮: 点击 🔇 可开启/关闭声音');
 </script>
 
 </body>
