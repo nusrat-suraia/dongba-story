@@ -46,7 +46,6 @@
             overflow: hidden;
         }
 
-        /* ===== COVER & ENDING ===== */
         .page-cover, .page-4 {
             background-image: url('background-pattern.png');
             background-size: cover;
@@ -64,7 +63,6 @@
             pointer-events: none;
         }
 
-        /* ===== SCROLLING BACKGROUND FOR PAGES 1, 2, 3 ===== */
         .page-1, .page-2, .page-3 {
             background-image: url('page-bg.jpg?v=2');
             background-size: cover;
@@ -82,7 +80,6 @@
             pointer-events: none;
         }
 
-        /* ===== SCROLL HINT ===== */
         .scroll-hint {
             position: absolute;
             bottom: 80px;
@@ -100,7 +97,6 @@
             50% { transform: translateX(-50%) translateY(-8px); }
         }
 
-        /* ===== COVER PAGE ===== */
         .cover-title {
             font-size: 42px;
             font-weight: 700;
@@ -155,7 +151,6 @@
             transform: scale(0.95);
         }
 
-        /* ===== SCENE LABEL ===== */
         .scene-label {
             font-size: 18px;
             color: rgba(245, 215, 66, 0.8);
@@ -166,7 +161,6 @@
             font-family: "楷体", "KaiTi", serif;
         }
 
-        /* ===== VIDEO WRAPPER ===== */
         .video-wrapper {
             width: 100%;
             max-width: 420px;
@@ -199,7 +193,6 @@
             font-family: "楷体", "KaiTi", serif;
         }
 
-        /* ===== SOUND TOGGLE BUTTON ===== */
         .sound-toggle {
             position: absolute;
             bottom: 12px;
@@ -226,7 +219,6 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
-        /* ===== MAIN TEXT ===== */
         .main-text {
             font-size: 22px;
             line-height: 2.2;
@@ -254,7 +246,6 @@
             }
         }
 
-        /* ===== POPUP BUTTON - AT BOTTOM ===== */
         .btn-popup-wrapper {
             position: absolute;
             bottom: 30px;
@@ -286,7 +277,6 @@
             background: #4a2f22;
         }
 
-        /* ===== ENDING PAGE ===== */
         .ending-text {
             font-size: 24px;
             line-height: 2.6;
@@ -317,7 +307,6 @@
             z-index: 2;
         }
 
-        /* ===== POPUP MODAL ===== */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -427,7 +416,6 @@
             scrollbar-width: none;
         }
 
-        /* ===== SOUND HINT ===== */
         .sound-hint {
             position: absolute;
             bottom: 58px;
@@ -466,7 +454,6 @@
 </head>
 <body>
 
-<!-- ===== MODAL ===== -->
 <div class="modal-overlay" id="modal">
     <div class="modal-content">
         <button class="modal-close" id="modalClose">✕</button>
@@ -480,10 +467,8 @@
     </div>
 </div>
 
-<!-- ===== PAGES ===== -->
 <div class="container" id="container">
 
-    <!-- PAGE 0: COVER -->
     <div class="page page-cover">
         <div class="cover-title">《东巴家训》</div>
         <div class="cover-decoration"></div>
@@ -492,7 +477,6 @@
         <div class="scroll-hint">⬇ 滑动翻页 ⬇</div>
     </div>
 
-    <!-- PAGE 1 -->
     <div class="page page-1" id="page1">
         <div class="scene-label">— 祭天敬老 —</div>
         <div class="video-wrapper" id="videoWrapper1" onclick="toggleVideoSound(1)">
@@ -510,7 +494,6 @@
         <div class="scroll-hint">⬇ 滑动翻页 ⬇</div>
     </div>
 
-    <!-- PAGE 2 -->
     <div class="page page-2" id="page2">
         <div class="scene-label">— 除秽迎新 —</div>
         <div class="video-wrapper" id="videoWrapper2" onclick="toggleVideoSound(2)">
@@ -528,7 +511,6 @@
         <div class="scroll-hint">⬇ 滑动翻页 ⬇</div>
     </div>
 
-    <!-- PAGE 3 -->
     <div class="page page-3" id="page3">
         <div class="scene-label">— 烧天香祈福 —</div>
         <div class="video-wrapper" id="videoWrapper3" onclick="toggleVideoSound(3)">
@@ -546,7 +528,6 @@
         <div class="scroll-hint">⬇ 滑动翻页 ⬇</div>
     </div>
 
-    <!-- PAGE 4: ENDING -->
     <div class="page page-4">
         <div class="ending-text">
             <div class="line">这些不是古书里的字。</div>
@@ -563,68 +544,59 @@
 </div>
 
 <script>
-    // ===== POPUP DATA =====
+    // ===== UPDATED POPUP DATA WITH NEW SOURCES =====
     const pageData = {
         1: {
             title: '祭天敬老 · 典籍原文',
             scriptureImage: 'original1.jpg',
             interpretation: 'Interpretation 1 - 待教授补充',
-            source: '和志武《纳西学论集》'
+            source: '《祭天·用鸡许愿作来年祭牲》'
         },
         2: {
             title: '除秽迎新 · 典籍原文',
             scriptureImage: 'original2.jpg',
             interpretation: 'Interpretation 2 - 待教授补充',
-            source: '杨福泉《东巴文献及其当代释读刊布和创新》'
+            source: '《在斯蹒祖先地住架檀子经》'
         },
         3: {
             title: '烧天香祈福 · 典籍原文',
             scriptureImage: 'original3.jpg',
             interpretation: 'Interpretation 3 - 待教授补充',
-            source: '和志武《纳西学论集》'
+            source: '《烧天香》'
         }
     };
 
-    // ===== SOUND FUNCTIONS =====
-    // When user taps the sound button
     function toggleSound(pageNum) {
         const video = document.getElementById('video' + pageNum);
         const toggle = document.getElementById('soundToggle' + pageNum);
         const hint = document.getElementById('soundHint' + pageNum);
         
         if (video.muted) {
-            // Try to unmute
             video.muted = false;
             video.play().then(function() {
-                // Success - sound is on
                 toggle.textContent = '🔊';
                 hint.style.display = 'none';
             }).catch(function() {
-                // Browser blocked it - show hint to tap video
                 video.muted = true;
                 toggle.textContent = '🔇';
                 hint.style.display = 'block';
-                // Hide hint after 3 seconds
                 setTimeout(function() {
                     hint.style.display = 'none';
                 }, 3000);
             });
         } else {
-            // Mute the video
             video.muted = true;
             toggle.textContent = '🔇';
             hint.style.display = 'none';
         }
     }
 
-    // When user taps the video itself
     function toggleVideoSound(pageNum) {
         const video = document.getElementById('video' + pageNum);
         const toggle = document.getElementById('soundToggle' + pageNum);
         const hint = document.getElementById('soundHint' + pageNum);
         
         if (video) {
-            // Toggle mute state
             video.muted = !video.muted;
             if (video.muted) {
                 toggle.textContent = '🔇';
@@ -632,13 +604,11 @@
             } else {
                 toggle.textContent = '🔊';
                 hint.style.display = 'none';
-                // Try to play with sound
                 video.play().catch(function() {});
             }
         }
     }
 
-    // ===== OPEN MODAL =====
     function openModal(pageNum) {
         const data = pageData[pageNum];
         if (!data) return;
@@ -665,7 +635,6 @@
         document.body.style.overflow = 'hidden';
     }
 
-    // ===== CLOSE MODAL =====
     function closeModal() {
         document.getElementById('modal').classList.remove('active');
         document.body.style.overflow = '';
@@ -676,7 +645,6 @@
         if (e.target === this) closeModal();
     });
 
-    // ===== GO TO PAGE =====
     function goToPage(pageNum) {
         const container = document.getElementById('container');
         const pages = container.querySelectorAll('.page');
@@ -685,7 +653,6 @@
         }
     }
 
-    // ===== LOAD VIDEO =====
     function loadVideo(pageNum, videoFile) {
         const video = document.getElementById('video' + pageNum);
         const placeholder = document.getElementById('videoPlaceholder' + pageNum);
@@ -703,12 +670,10 @@
         }
     }
 
-    // ===== LOAD VIDEOS =====
     loadVideo(1, 'Video1.mp4');
     loadVideo(2, 'Video2.mp4');
     loadVideo(3, 'Video3.mp4');
 
-    // ===== AUTO-PLAY VIDEOS =====
     const observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
             const video = entry.target.querySelector('video');
@@ -725,6 +690,7 @@
     });
 
     console.log('✅ 东巴家训 H5 已加载！');
+    console.log('✅ 已更新典籍来源');
     console.log('✅ 声音控制: 点击视频或🔇按钮切换声音');
 </script>
 
