@@ -64,15 +64,22 @@
             pointer-events: none;
         }
 
-        /* ===== OTHER PAGES (colored backgrounds) ===== */
-        .page-1 {
-            background: linear-gradient(135deg, #2d1b1b 0%, #4a2c2c 50%, #2d1b1b 100%);
+        /* ===== SAME BACKGROUND IMAGE FOR PAGES 1, 2, 3 ===== */
+        .page-1, .page-2, .page-3 {
+            background-image: url('page-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
-        .page-2 {
-            background: linear-gradient(135deg, #1a2e1a 0%, #2c4a2c 50%, #1a2e1a 100%);
-        }
-        .page-3 {
-            background: linear-gradient(135deg, #2e1a0f 0%, #4a2c1a 50%, #2e1a0f 100%);
+        .page-1::before, .page-2::before, .page-3::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            pointer-events: none;
         }
 
         /* ===== SCROLL HINT ===== */
@@ -581,7 +588,7 @@
         }
     }
 
-    // ===== LOAD VIDEOS - NOW ACTIVE! =====
+    // ===== LOAD VIDEOS =====
     loadVideo(1, 'Video1.mp4');
     loadVideo(2, 'Video2.mp4');
     loadVideo(3, 'Video3.mp4');
@@ -603,7 +610,8 @@
     });
 
     console.log('✅ 东巴家训 H5 已加载！');
-    console.log('✅ 背景图片: background-pattern.png');
+    console.log('✅ 背景图片: background-pattern.png (Cover + Ending)');
+    console.log('✅ 背景图片: page-bg.jpg (Pages 1, 2, 3)');
     console.log('✅ 视频已加载: Video1.mp4, Video2.mp4, Video3.mp4');
 </script>
 
