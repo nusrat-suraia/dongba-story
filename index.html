@@ -48,7 +48,7 @@
 
         /* ===== BACKGROUND IMAGE FOR COVER & ENDING ===== */
         .page-cover, .page-4 {
-            background-image: url('background.jpg');
+            background-image: url('background-pattern.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -64,7 +64,7 @@
             pointer-events: none;
         }
 
-        /* ===== OTHER PAGES (Waiting for client's choice) ===== */
+        /* ===== OTHER PAGES (colored backgrounds) ===== */
         .page-1 {
             background: linear-gradient(135deg, #2d1b1b 0%, #4a2c2c 50%, #2d1b1b 100%);
         }
@@ -191,7 +191,7 @@
             font-family: "楷体", "KaiTi", serif;
         }
 
-        /* ===== MAIN TEXT - LARGER FONT ===== */
+        /* ===== MAIN TEXT ===== */
         .main-text {
             font-size: 22px;
             line-height: 2.2;
@@ -282,7 +282,7 @@
             z-index: 2;
         }
 
-        /* ===== POPUP MODAL - WITH IMAGE SUPPORT ===== */
+        /* ===== POPUP MODAL ===== */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -358,7 +358,6 @@
             font-style: italic;
         }
 
-        /* ===== ORIGINAL TEXT AS IMAGE ===== */
         .modal-scripture-image {
             width: 100%;
             max-height: 300px;
@@ -385,7 +384,6 @@
             color: #fff;
         }
 
-        /* ===== SCROLLBAR HIDE ===== */
         .container::-webkit-scrollbar {
             display: none;
         }
@@ -394,7 +392,6 @@
             scrollbar-width: none;
         }
 
-        /* ===== RESPONSIVE ===== */
         @media (max-width: 380px) {
             .cover-title { font-size: 32px; }
             .cover-subtitle { font-size: 16px; }
@@ -425,9 +422,7 @@
         <div class="modal-title" id="modalTitle">典籍原文</div>
         <div class="modal-divider"></div>
         <div class="modal-body" id="modalBody">
-            <!-- Original Scripture as IMAGE -->
             <img id="modalScriptureImage" class="modal-scripture-image" src="" alt="典籍原文" style="display:none;">
-            <!-- Interpretation as TEXT -->
             <p id="modalInterpretation" style="margin-top:12px; color:rgba(245,215,66,0.8);"></p>
             <div class="source" id="modalSource">—— 和志武《纳西学论集》</div>
         </div>
@@ -446,7 +441,7 @@
         <div class="scroll-hint">⬇ 滑动翻页 ⬇</div>
     </div>
 
-    <!-- PAGE 1: 祭天敬老 -->
+    <!-- PAGE 1 -->
     <div class="page page-1" id="page1">
         <div class="scene-label">— 祭天敬老 —</div>
         <div class="video-wrapper">
@@ -460,7 +455,7 @@
         <div class="scroll-hint">⬇ 滑动翻页 ⬇</div>
     </div>
 
-    <!-- PAGE 2: 除秽迎新 -->
+    <!-- PAGE 2 -->
     <div class="page page-2" id="page2">
         <div class="scene-label">— 除秽迎新 —</div>
         <div class="video-wrapper">
@@ -474,7 +469,7 @@
         <div class="scroll-hint">⬇ 滑动翻页 ⬇</div>
     </div>
 
-    <!-- PAGE 3: 烧天香祈福 -->
+    <!-- PAGE 3 -->
     <div class="page page-3" id="page3">
         <div class="scene-label">— 烧天香祈福 —</div>
         <div class="video-wrapper">
@@ -509,19 +504,19 @@
     const pageData = {
         1: {
             title: '祭天敬老 · 典籍原文',
-            scriptureImage: 'original1.jpg',  // ← Replace with actual image file name
+            scriptureImage: 'original1.jpg',
             interpretation: 'Interpretation 1 - 待教授补充',
             source: '和志武《纳西学论集》'
         },
         2: {
             title: '除秽迎新 · 典籍原文',
-            scriptureImage: 'original2.jpg',  // ← Replace with actual image file name
+            scriptureImage: 'original2.jpg',
             interpretation: 'Interpretation 2 - 待教授补充',
             source: '杨福泉《东巴文献及其当代释读刊布和创新》'
         },
         3: {
             title: '烧天香祈福 · 典籍原文',
-            scriptureImage: 'original3.jpg',  // ← Replace with actual image file name
+            scriptureImage: 'original3.jpg',
             interpretation: 'Interpretation 3 - 待教授补充',
             source: '和志武《纳西学论集》'
         }
@@ -534,16 +529,14 @@
 
         document.getElementById('modalTitle').textContent = data.title;
         
-        // Show scripture as IMAGE
         const img = document.getElementById('modalScriptureImage');
         if (data.scriptureImage) {
             img.src = data.scriptureImage;
             img.style.display = 'block';
             img.onerror = function() {
-                // If image doesn't load, show fallback text
                 this.style.display = 'none';
                 document.getElementById('modalInterpretation').innerHTML = 
-                    '📷 图片待上传<br><small style="color:rgba(255,255,255,0.4);">请将原图命名为 ' + data.scriptureImage + ' 放入同一文件夹</small>';
+                    '📷 原图待上传<br><small style="color:rgba(255,255,255,0.4);">请将原图命名为 ' + data.scriptureImage + ' 放入同一文件夹</small>';
             };
         } else {
             img.style.display = 'none';
@@ -588,6 +581,11 @@
         }
     }
 
+    // ===== LOAD VIDEOS - NOW ACTIVE! =====
+    loadVideo(1, 'Video1.mp4');
+    loadVideo(2, 'Video2.mp4');
+    loadVideo(3, 'Video3.mp4');
+
     // ===== AUTO-PLAY VIDEOS =====
     const observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
@@ -605,9 +603,8 @@
     });
 
     console.log('✅ 东巴家训 H5 已加载！');
-    console.log('📌 请将背景图片命名为 background.jpg 放入同一文件夹');
-    console.log('📌 请将原图命名为 original1.jpg, original2.jpg, original3.jpg');
-    console.log('📌 当收到视频后调用: loadVideo(1, "Video1.mp4")');
+    console.log('✅ 背景图片: background-pattern.png');
+    console.log('✅ 视频已加载: Video1.mp4, Video2.mp4, Video3.mp4');
 </script>
 
 </body>
