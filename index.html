@@ -66,11 +66,11 @@
 
         /* ===== SCROLLING BACKGROUND FOR PAGES 1, 2, 3 ===== */
         .page-1, .page-2, .page-3 {
-            background-attachment: fixed;
-            background-image: url('page-bg.jpg');
+            background-image: url('page-bg.jpg?v=2');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            /* NO background-attachment: fixed - this makes it scroll! */
         }
         .page-1::before, .page-2::before, .page-3::before {
             content: '';
