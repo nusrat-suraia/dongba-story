@@ -46,7 +46,7 @@
             overflow: hidden;
         }
 
-        /* ===== BACKGROUND IMAGE FOR COVER & ENDING ===== */
+        /* ===== COVER & ENDING ===== */
         .page-cover, .page-4 {
             background-image: url('background-pattern.png');
             background-size: cover;
@@ -64,8 +64,9 @@
             pointer-events: none;
         }
 
-        /* ===== SAME BACKGROUND IMAGE FOR PAGES 1, 2, 3 ===== */
+        /* ===== SCROLLING BACKGROUND FOR PAGES 1, 2, 3 ===== */
         .page-1, .page-2, .page-3 {
+            background-attachment: fixed;
             background-image: url('page-bg.jpg');
             background-size: cover;
             background-position: center;
@@ -611,7 +612,7 @@
 
     console.log('✅ 东巴家训 H5 已加载！');
     console.log('✅ 背景图片: background-pattern.png (Cover + Ending)');
-    console.log('✅ 背景图片: page-bg.jpg (Pages 1, 2, 3)');
+    console.log('✅ 滚动背景: page-bg.jpg (Pages 1, 2, 3)');
     console.log('✅ 视频已加载: Video1.mp4, Video2.mp4, Video3.mp4');
 </script>
 
