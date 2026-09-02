@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>东巴家训 - 纳西族人的春节</title>
+    <title>岁启纳西年 - 纳西族人的春节</title>
     <style>
         * {
             margin: 0;
@@ -168,7 +168,7 @@
             background: rgba(0,0,0,0.5);
             border-radius: 16px;
             overflow: hidden;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
             position: relative;
             z-index: 1;
             border: 2px solid rgba(255,255,255,0.1);
@@ -219,12 +219,26 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
+        .sound-hint {
+            position: absolute;
+            bottom: 58px;
+            right: 12px;
+            z-index: 9;
+            color: rgba(255,255,255,0.3);
+            font-size: 10px;
+            background: rgba(0,0,0,0.4);
+            padding: 2px 8px;
+            border-radius: 10px;
+            letter-spacing: 1px;
+            font-family: "楷体", "KaiTi", serif;
+        }
+
         .main-text {
             font-size: 22px;
             line-height: 2.2;
             color: #f5f0e8;
             max-width: 440px;
-            margin-bottom: 20px;
+            margin-bottom: 4px;
             position: relative;
             z-index: 1;
             opacity: 0;
@@ -233,6 +247,23 @@
             letter-spacing: 2px;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
             font-family: "楷体", "KaiTi", serif;
+        }
+
+        .add-text {
+            font-size: 19px;
+            line-height: 2.0;
+            color: rgba(245, 215, 66, 0.85);
+            max-width: 420px;
+            margin-bottom: 14px;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+            animation-delay: 0.6s;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            font-family: "楷体", "KaiTi", serif;
+            font-style: italic;
         }
 
         @keyframes fadeInUp {
@@ -416,26 +447,13 @@
             scrollbar-width: none;
         }
 
-        .sound-hint {
-            position: absolute;
-            bottom: 58px;
-            right: 12px;
-            z-index: 9;
-            color: rgba(255,255,255,0.3);
-            font-size: 10px;
-            background: rgba(0,0,0,0.4);
-            padding: 2px 8px;
-            border-radius: 10px;
-            letter-spacing: 1px;
-            font-family: "楷体", "KaiTi", serif;
-        }
-
         @media (max-width: 380px) {
-            .cover-title { font-size: 32px; }
-            .cover-subtitle { font-size: 16px; }
+            .cover-title { font-size: 30px; letter-spacing: 4px; }
+            .cover-subtitle { font-size: 16px; letter-spacing: 4px; }
             .main-text { font-size: 18px; }
+            .add-text { font-size: 16px; }
             .ending-text { font-size: 20px; }
-            .scene-label { font-size: 15px; }
+            .scene-label { font-size: 15px; letter-spacing: 8px; }
             .modal-content { padding: 20px 16px; }
             .btn-begin { font-size: 18px; padding: 12px 40px; height: 50px; }
             .btn-popup { font-size: 16px; height: 44px; }
@@ -447,6 +465,7 @@
             .cover-title { font-size: 54px; }
             .cover-subtitle { font-size: 24px; }
             .main-text { font-size: 26px; max-width: 520px; }
+            .add-text { font-size: 22px; max-width: 500px; }
             .video-wrapper { max-width: 500px; }
             .ending-text { font-size: 30px; max-width: 520px; }
         }
@@ -469,16 +488,18 @@
 
 <div class="container" id="container">
 
+    <!-- PAGE 0: COVER -->
     <div class="page page-cover">
-        <div class="cover-title">《东巴家训》</div>
+        <div class="cover-title">《岁启纳西年》</div>
         <div class="cover-decoration"></div>
         <div class="cover-subtitle">纳西族人的春节<br>东巴经中的家庭伦理智慧与当代传承</div>
         <button class="btn-begin" onclick="goToPage(1)">开始探索</button>
         <div class="scroll-hint">⬇ 滑动翻页 ⬇</div>
     </div>
 
+    <!-- PAGE 1: 除秽迎新 -->
     <div class="page page-1" id="page1">
-        <div class="scene-label">— 祭天敬老 —</div>
+        <div class="scene-label">— 除秽迎新 —</div>
         <div class="video-wrapper" id="videoWrapper1" onclick="toggleVideoSound(1)">
             <div class="video-placeholder" id="videoPlaceholder1">🎬 视频待上传</div>
             <video id="video1" muted playsinline style="display:none;"></video>
@@ -487,15 +508,17 @@
             </button>
             <div class="sound-hint" id="soundHint1" style="display:none;">点击视频开启声音</div>
         </div>
-        <p class="main-text">东巴经里说，祭完天，先请老人尝头道酒。敬天，就是敬老。老人，是家里最先坐下的人。</p>
+        <p class="main-text">东巴经里说，不除秽，天神不享福。扫去旧年的灰尘，才能干干净净迎新年。</p>
+        <p class="add-text">把旧的扫出去，才能把新的请进来。</p>
         <div class="btn-popup-wrapper">
             <button class="btn-popup" onclick="openModal(1)">📖 点击查看典籍原文</button>
         </div>
         <div class="scroll-hint">⬇ 滑动翻页 ⬇</div>
     </div>
 
+    <!-- PAGE 2: 烧天香祈福 -->
     <div class="page page-2" id="page2">
-        <div class="scene-label">— 除秽迎新 —</div>
+        <div class="scene-label">— 烧天香祈福 —</div>
         <div class="video-wrapper" id="videoWrapper2" onclick="toggleVideoSound(2)">
             <div class="video-placeholder" id="videoPlaceholder2">🎬 视频待上传</div>
             <video id="video2" muted playsinline style="display:none;"></video>
@@ -504,15 +527,17 @@
             </button>
             <div class="sound-hint" id="soundHint2" style="display:none;">点击视频开启声音</div>
         </div>
-        <p class="main-text">东巴经里说，不除秽，天神不享福。扫去旧年的灰尘，才能干干净净迎接新年。</p>
+        <p class="main-text">东巴经里说，向天地祭天香，愿家庭平安兴旺。一缕青烟，把愿望送到神灵耳边。</p>
+        <p class="add-text">神灵请回来了，一家人才能整整齐齐地祭天。</p>
         <div class="btn-popup-wrapper">
             <button class="btn-popup" onclick="openModal(2)">📖 点击查看典籍原文</button>
         </div>
         <div class="scroll-hint">⬇ 滑动翻页 ⬇</div>
     </div>
 
+    <!-- PAGE 3: 祭天敬老 -->
     <div class="page page-3" id="page3">
-        <div class="scene-label">— 烧天香祈福 —</div>
+        <div class="scene-label">— 祭天敬老 —</div>
         <div class="video-wrapper" id="videoWrapper3" onclick="toggleVideoSound(3)">
             <div class="video-placeholder" id="videoPlaceholder3">🎬 视频待上传</div>
             <video id="video3" muted playsinline style="display:none;"></video>
@@ -521,13 +546,15 @@
             </button>
             <div class="sound-hint" id="soundHint3" style="display:none;">点击视频开启声音</div>
         </div>
-        <p class="main-text">东巴经里说，向天地祭天香，愿家庭平安兴旺。一缕青烟，把愿望送到神灵耳边。</p>
+        <p class="main-text">东巴经里说，祭完天，先请老人尝头道酒。敬天，就是敬老。老人，是家里最先坐下的人。</p>
+        <p class="add-text">这就是纳西族人的春节：除秽、烧天香、祭天，一件接一件，年年如此。</p>
         <div class="btn-popup-wrapper">
             <button class="btn-popup" onclick="openModal(3)">📖 点击查看典籍原文</button>
         </div>
         <div class="scroll-hint">⬇ 滑动翻页 ⬇</div>
     </div>
 
+    <!-- PAGE 4: ENDING -->
     <div class="page page-4">
         <div class="ending-text">
             <div class="line">这些不是古书里的字。</div>
@@ -537,32 +564,32 @@
             <div class="line">也是东巴经活着的每一天。</div>
         </div>
         <div style="position:absolute; bottom:30px; left:0; right:0; text-align:center; color:rgba(255,255,255,0.2); font-size:14px; letter-spacing:6px; z-index:2; font-family:'楷体',serif;">
-            东巴家训 · 纳西族人的春节
+            岁启纳西年 · 纳西族人的春节
         </div>
     </div>
 
 </div>
 
 <script>
-    // ===== UPDATED POPUP DATA WITH NEW SOURCES =====
+    // ===== POPUP DATA WITH UPDATED SOURCES =====
     const pageData = {
         1: {
-            title: '祭天敬老 · 典籍原文',
-            scriptureImage: 'original1.jpg',
-            interpretation: 'Interpretation 1 - 待教授补充',
-            source: '《祭天·用鸡许愿作来年祭牲》'
-        },
-        2: {
             title: '除秽迎新 · 典籍原文',
             scriptureImage: 'original2.jpg',
             interpretation: 'Interpretation 2 - 待教授补充',
-            source: '《在斯蹒祖先地住架檀子经》'
+            source: '祭斯蹦祖先仪式：《在斯蹦祖先地住架檀子经》'
         },
-        3: {
+        2: {
             title: '烧天香祈福 · 典籍原文',
             scriptureImage: 'original3.jpg',
             interpretation: 'Interpretation 3 - 待教授补充',
-            source: '《烧天香》'
+            source: '烧天香仪式 ：《烧天香》'
+        },
+        3: {
+            title: '祭天敬老 · 典籍原文',
+            scriptureImage: 'original1.jpg',
+            interpretation: 'Interpretation 1 - 待教授补充',
+            source: '祭天仪式：《祭天·用鸡许愿作来年祭牲》'
         }
     };
 
@@ -670,9 +697,13 @@
         }
     }
 
-    loadVideo(1, 'Video1.mp4');
-    loadVideo(2, 'Video2.mp4');
-    loadVideo(3, 'Video3.mp4');
+    // ===== VIDEOS MAPPED TO NEW PAGE ORDER =====
+    // Page 1 (除秽迎新) → Video2.mp4
+    // Page 2 (烧天香祈福) → Video3.mp4
+    // Page 3 (祭天敬老) → Video1.mp4
+    loadVideo(1, 'Video2.mp4');
+    loadVideo(2, 'Video3.mp4');
+    loadVideo(3, 'Video1.mp4');
 
     const observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
@@ -689,8 +720,9 @@
         observer.observe(page);
     });
 
-    console.log('✅ 东巴家训 H5 已加载！');
-    console.log('✅ 已更新典籍来源');
+    console.log('✅ 岁启纳西年 H5 已加载！');
+    console.log('✅ 页面顺序: 1.除秽迎新 2.烧天香祈福 3.祭天敬老');
+    console.log('✅ 视频映射: Page1→Video2, Page2→Video3, Page3→Video1');
     console.log('✅ 声音控制: 点击视频或🔇按钮切换声音');
 </script>
 
