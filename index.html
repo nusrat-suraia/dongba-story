@@ -46,7 +46,7 @@
             overflow: hidden;
         }
 
-        /* ===== COVER & ENDING (pattern background) ===== */
+        /* ===== COVER & ENDING ===== */
         .page-cover, .page-4 {
             background-image: url('background-pattern.png');
             background-size: cover;
@@ -64,9 +64,9 @@
             pointer-events: none;
         }
 
-        /* ===== PROLOGUE + SCENE PAGES (page-bg.jpg) ===== */
+        /* ===== PROLOGUE + SCENE PAGES ===== */
         .page-1, .page-2, .page-3, .page-5 {
-            background-image: url('page-bg.jpg?v=4');
+            background-image: url('page-bg.jpg?v=5');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -260,42 +260,44 @@
             font-family: "楷体", "KaiTi", serif;
         }
 
+        /* ===== BIGGER SOUND BUTTON ===== */
         .sound-toggle {
             position: absolute;
-            bottom: 12px;
-            right: 12px;
+            bottom: 14px;
+            right: 14px;
             z-index: 10;
-            background: rgba(0, 0, 0, 0.6);
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(0, 0, 0, 0.65);
+            border: 2.5px solid rgba(255, 255, 255, 0.5);
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: 56px;
+            height: 56px;
             color: #ffffff;
-            font-size: 18px;
+            font-size: 24px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s;
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
         }
 
         .sound-toggle:active {
             transform: scale(0.9);
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.25);
         }
 
         .sound-hint {
             position: absolute;
-            bottom: 58px;
-            right: 12px;
+            bottom: 78px;
+            right: 14px;
             z-index: 9;
-            color: rgba(255,255,255,0.3);
-            font-size: 10px;
-            background: rgba(0,0,0,0.4);
-            padding: 2px 8px;
-            border-radius: 10px;
+            color: rgba(255,255,255,0.5);
+            font-size: 11px;
+            background: rgba(0,0,0,0.5);
+            padding: 3px 10px;
+            border-radius: 12px;
             letter-spacing: 1px;
             font-family: "楷体", "KaiTi", serif;
         }
@@ -402,6 +404,7 @@
         .ending-text .line:nth-child(2) { animation-delay: 0.7s; }
         .ending-text .line:nth-child(3) { animation-delay: 1.1s; }
         .ending-text .line:nth-child(4) { animation-delay: 1.5s; }
+        .ending-text .line:nth-child(5) { animation-delay: 1.9s; }
 
         .ending-divider {
             width: 50px;
@@ -535,7 +538,8 @@
             .btn-begin { font-size: 18px; padding: 12px 40px; height: 50px; }
             .btn-continue { font-size: 16px; padding: 12px 35px; height: 48px; }
             .btn-popup { font-size: 16px; height: 44px; }
-            .sound-toggle { width: 34px; height: 34px; font-size: 14px; }
+            .sound-toggle { width: 48px; height: 48px; font-size: 20px; }
+            .sound-hint { bottom: 68px; font-size: 10px; }
             .prologue-image { max-width: 140px; }
         }
 
@@ -550,6 +554,7 @@
             .video-wrapper { max-width: 500px; }
             .ending-text { font-size: 28px; max-width: 540px; }
             .prologue-image { max-width: 260px; }
+            .sound-toggle { width: 64px; height: 64px; font-size: 28px; }
         }
     </style>
 </head>
@@ -580,11 +585,11 @@
         <div class="scroll-hint">⬇ 滑动翻页 ⬇</div>
     </div>
 
-    <!-- PAGE 1: PROLOGUE (uses page-bg.jpg) -->
+    <!-- PAGE 1: PROLOGUE -->
     <div class="page page-1" id="page1">
         <div class="prologue-title">一部活着的经典</div>
         <img class="prologue-image" src="book-image.jpg" alt="东巴经">
-        <p class="prologue-text">东巴经，是纳西族祭司用象形文字书写的经典，记载了纳西人与天地、祖先、家人的相处之道。我们请教了研究东巴文化的学者，了解到：很多完整的东巴仪式今天已不再频繁举行，但经典中的要义早已化为民俗，深深影响着纳西人的思想与日常。这，就是典籍的传承。</p>
+        <p class="prologue-text">东巴经，是纳西族祭司用象形文字书写的经典，记载了纳西人与天地、祖先、家人的相处之道。如今，部分完整的东巴仪式已不再举行，但经典中的要义早已化为民俗，深深影响着纳西人的思想与日常。这，就是典籍的传承。</p>
         <button class="btn-continue" onclick="goToPage(2)">继续探索</button>
         <div class="scroll-hint">⬇ 滑动翻页 ⬇</div>
     </div>
@@ -600,8 +605,8 @@
             </button>
             <div class="sound-hint" id="soundHint2" style="display:none;">点击视频开启声音</div>
         </div>
-        <p class="main-text">今天很多家庭不再做完整的除秽仪式，但年前大扫除的习惯，每个纳西人都没落下。</p>
-        <p class="add-text">形式在变，对"洁净"的讲究没变。</p>
+        <p class="main-text">在东巴文化里，"秽"不只是灰尘，更是旧年的晦气、心里的杂念。年前大扫除的习俗在纳西人家代代相传。</p>
+        <p class="add-text">形式在变，对洁净的讲究没变。</p>
         <div class="btn-popup-wrapper">
             <button class="btn-popup" onclick="openModal(2)">📖 点击查看典籍原文</button>
         </div>
@@ -619,8 +624,8 @@
             </button>
             <div class="sound-hint" id="soundHint3" style="display:none;">点击视频开启声音</div>
         </div>
-        <p class="main-text">如今住在城里的人家，未必有院落烧天香。但春节时在阳台点一炷香、心里默念平安的习惯，依然延续着古老的虔诚。</p>
-        <p class="add-text">形式在变，敬畏天地的心意没变。</p>
+        <p class="main-text">烧天香，是纳西人祭天前的重要环节。春节时点一炷香、默念平安的习惯延续了纳西人对天地祖先的虔诚。</p>
+        <p class="add-text">仪轨有更，对天地的敬畏不改。</p>
         <div class="btn-popup-wrapper">
             <button class="btn-popup" onclick="openModal(3)">📖 点击查看典籍原文</button>
         </div>
@@ -638,8 +643,8 @@
             </button>
             <div class="sound-hint" id="soundHint4" style="display:none;">点击视频开启声音</div>
         </div>
-        <p class="main-text">今天的年夜饭桌上，长辈先动筷的习惯，就是从这条古训里来的。这就是纳西族人的春节：除秽、烧天香、祭天，一件接一件，年年如此。</p>
-        <p class="add-text">典籍不死，它在日常中延续。</p>
+        <p class="main-text">祭天仪式结束后，头道酒要先敬给最年长的人。今天年夜饭桌上长辈先动筷的习惯，正是祭天古训在民间的延续。</p>
+        <p class="add-text">杯盏有先，对长者的敬重长存。</p>
         <div class="btn-popup-wrapper">
             <button class="btn-popup" onclick="openModal(4)">📖 点击查看典籍原文</button>
         </div>
@@ -649,15 +654,15 @@
     <!-- PAGE 5: ENDING -->
     <div class="page page-4" id="page5">
         <div class="ending-text">
-            <div class="line">这些不是古书里的字。</div>
+            <div class="line">这不仅是古书里的字，</div>
             <div class="ending-divider"></div>
-            <div class="line">这是一个纳西族人的春节。</div>
+            <div class="line">也是纳西族人的春节，</div>
             <div class="ending-divider"></div>
-            <div class="line">也是东巴经活着的每一天。</div>
+            <div class="line">更是东巴经活着的日子。</div>
             <div class="ending-divider"></div>
-            <div class="line">典籍不死，它在日常中延续。</div>
+            <div class="line">典籍不死，在日常中延续；</div>
             <div class="ending-divider"></div>
-            <div class="line">传承不息，它在生活里生长。</div>
+            <div class="line">传承不息，在生活中生长。</div>
         </div>
         <div style="position:absolute; bottom:30px; left:0; right:0; text-align:center; color:rgba(255,255,255,0.2); font-size:14px; letter-spacing:6px; z-index:2; font-family:'楷体',serif;">
             岁启纳西年 · 纳西族人的春节
@@ -796,7 +801,7 @@
     }
 
     // ===== VIDEO MAPPING =====
-    loadVideo(2, 'Video1.mp4');
+    loadVideo(2, 'Video2.mp4');
     loadVideo(3, 'Video2.mp4');
     loadVideo(4, 'Video3.mp4');
 
@@ -817,7 +822,8 @@
     });
 
     console.log('✅ 岁启纳西年 H5 已加载！');
-    console.log('✅ 序章页使用 page-bg.jpg 背景');
+    console.log('✅ 声音按钮已增大');
+    console.log('✅ 文本已更新');
 </script>
 
 </body>
