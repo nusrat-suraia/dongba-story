@@ -46,14 +46,14 @@
             overflow: hidden;
         }
 
-        /* ===== BACKGROUNDS ===== */
-        .page-cover, .page-4, .page-1 {
+        /* Cover + Ending - original pattern */
+        .page-cover, .page-4 {
             background-image: url('background-pattern.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
         }
-        .page-cover::before, .page-4::before, .page-1::before {
+        .page-cover::before, .page-4::before {
             content: '';
             position: absolute;
             top: 0;
@@ -64,13 +64,14 @@
             pointer-events: none;
         }
 
-        .page-2, .page-3, .page-5 {
-            background-image: url('page-bg.jpg?v=2');
+        /* All Content Pages (1, 2, 3, 5) - new image */
+        .page-1, .page-2, .page-3, .page-5 {
+            background-image: url('content-bg.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
         }
-        .page-2::before, .page-3::before, .page-5::before {
+        .page-1::before, .page-2::before, .page-3::before, .page-5::before {
             content: '';
             position: absolute;
             top: 0;
@@ -553,7 +554,7 @@
 </head>
 <body>
 
-<!-- ===== MODAL (Only Original Image + Source) ===== -->
+<!-- ===== MODAL ===== -->
 <div class="modal-overlay" id="modal">
     <div class="modal-content">
         <button class="modal-close" id="modalClose">✕</button>
@@ -665,7 +666,7 @@
 </div>
 
 <script>
-    // ===== POPUP DATA (Interpretation REMOVED) =====
+    // ===== POPUP DATA =====
     const pageData = {
         2: {
             title: '除秽迎新 · 典籍原文',
@@ -730,7 +731,7 @@
         }
     }
 
-    // ===== MODAL FUNCTIONS (Interpretation removed) =====
+    // ===== MODAL FUNCTIONS =====
     function openModal(pageNum) {
         const data = pageData[pageNum];
         if (!data) return;
@@ -815,8 +816,7 @@
     });
 
     console.log('✅ 岁启纳西年 H5 已加载！');
-    console.log('✅ 教授解读已移除，弹窗仅显示原图 + 来源');
-    console.log('✅ 正文已改为左对齐');
+    console.log('✅ 内容页已统一使用新背景图');
 </script>
 
 </body>
