@@ -46,7 +46,7 @@
             overflow: hidden;
         }
 
-        /* ===== BACKGROUNDS ===== */
+        /* ===== COVER & ENDING (pattern) ===== */
         .page-cover, .page-4, .page-1 {
             background-image: url('background-pattern.png');
             background-size: cover;
@@ -64,8 +64,9 @@
             pointer-events: none;
         }
 
+        /* ===== SCENE PAGES (page-bg.jpg) ===== */
         .page-2, .page-3, .page-5 {
-            background-image: url('content-bg.jpg');
+            background-image: url('page-bg.jpg?v=3'); /* Version tag updated */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -816,8 +817,6 @@
     });
 
     console.log('✅ 岁启纳西年 H5 已加载！');
-    console.log('✅ 背景图片: background-pattern.png (封面/序章/结尾)');
-    console.log('✅ 背景图片: content-bg.jpg (除秽/烧天香/祭天)');
 </script>
 
 </body>
