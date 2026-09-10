@@ -46,9 +46,9 @@
             overflow: hidden;
         }
 
-        /* ===== COVER & ENDING (pattern) ===== */
+        /* ===== COVER, PROLOGUE, ENDING (pattern background) ===== */
         .page-cover, .page-4, .page-1 {
-            background-image: url('background-pattern.png');
+            background-image: url('background-pattern.png?v=4');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -66,7 +66,7 @@
 
         /* ===== SCENE PAGES (page-bg.jpg) ===== */
         .page-2, .page-3, .page-5 {
-            background-image: url('page-bg.jpg?v=3'); /* Version tag updated */
+            background-image: url('page-bg.jpg?v=4');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -785,7 +785,7 @@
         const hint = document.getElementById('soundHint' + pageNum);
         
         if (video && videoFile) {
-            video.src = videoFile;
+            video.src = videoFile + '?v=4';  // Version tag added to bypass cache
             video.style.display = 'block';
             placeholder.style.display = 'none';
             toggle.style.display = 'flex';
@@ -817,6 +817,7 @@
     });
 
     console.log('✅ 岁启纳西年 H5 已加载！');
+    console.log('✅ 使用 ?v=4 强制刷新缓存');
 </script>
 
 </body>
