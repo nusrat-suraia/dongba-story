@@ -299,7 +299,7 @@
             font-family: "楷体", "KaiTi", serif;
         }
 
-        /* ===== NATURAL TEXT ALIGNMENT ===== */
+        /* ===== NATURAL TEXT ALIGNMENT (FIXED) ===== */
         .main-text {
             font-size: 18px;
             line-height: 2.2;
@@ -314,9 +314,7 @@
             letter-spacing: 0.5px;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
             font-family: "楷体", "KaiTi", serif;
-            text-align: justify;
-            text-justify: inter-ideograph;
-            word-break: break-all;
+            text-align: left; /* Natural left alignment */
             padding: 0 10px;
         }
 
@@ -818,7 +816,7 @@
     });
 
     console.log('✅ 岁启纳西年 H5 已加载！');
-    console.log('✅ 文本对齐已优化为自然排版');
+    console.log('✅ 文本对齐已恢复自然');
 </script>
 
 </body>
