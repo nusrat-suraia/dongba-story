@@ -299,23 +299,20 @@
             font-family: "楷体", "KaiTi", serif;
         }
 
-        /* ===== NATURAL TEXT ALIGNMENT (FIXED) ===== */
         .main-text {
             font-size: 18px;
             line-height: 2.2;
             color: #f5f0e8;
             max-width: 460px;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
             position: relative;
             z-index: 1;
             opacity: 0;
             animation: fadeInUp 0.8s ease forwards;
             animation-delay: 0.3s;
-            letter-spacing: 0.5px;
+            letter-spacing: 1.5px;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
             font-family: "楷体", "KaiTi", serif;
-            text-align: left; /* Natural left alignment */
-            padding: 0 10px;
         }
 
         .add-text {
@@ -329,12 +326,10 @@
             opacity: 0;
             animation: fadeInUp 0.8s ease forwards;
             animation-delay: 0.6s;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
             font-family: "楷体", "KaiTi", serif;
             font-style: italic;
-            text-align: center;
-            padding: 0 10px;
         }
 
         @keyframes fadeInUp {
@@ -526,8 +521,8 @@
             .cover-subtitle { font-size: 16px; letter-spacing: 4px; }
             .prologue-title { font-size: 24px; }
             .prologue-text { font-size: 15px; }
-            .main-text { font-size: 15px; padding: 0 8px; }
-            .add-text { font-size: 15px; padding: 0 8px; }
+            .main-text { font-size: 15px; }
+            .add-text { font-size: 15px; }
             .ending-text { font-size: 18px; }
             .scene-label { font-size: 15px; letter-spacing: 8px; }
             .modal-content { padding: 20px 16px; }
@@ -554,7 +549,7 @@
 </head>
 <body>
 
-<!-- ===== MODAL ===== -->
+<!-- ===== MODAL (Only Original Image + Source) ===== -->
 <div class="modal-overlay" id="modal">
     <div class="modal-content">
         <button class="modal-close" id="modalClose">✕</button>
@@ -666,7 +661,7 @@
 </div>
 
 <script>
-    // ===== POPUP DATA =====
+    // ===== POPUP DATA (Interpretation REMOVED) =====
     const pageData = {
         2: {
             title: '除秽迎新 · 典籍原文',
@@ -731,7 +726,7 @@
         }
     }
 
-    // ===== MODAL FUNCTIONS =====
+    // ===== MODAL FUNCTIONS (Interpretation removed) =====
     function openModal(pageNum) {
         const data = pageData[pageNum];
         if (!data) return;
@@ -816,7 +811,7 @@
     });
 
     console.log('✅ 岁启纳西年 H5 已加载！');
-    console.log('✅ 文本对齐已恢复自然');
+    console.log('✅ 教授解读已移除，弹窗仅显示原图 + 来源');
 </script>
 
 </body>
