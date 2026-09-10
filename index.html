@@ -153,7 +153,7 @@
             transform: scale(0.95);
         }
 
-        /* ===== PROLOGUE PAGE (Page 1) ===== */
+        /* ===== PROLOGUE PAGE ===== */
         .prologue-title {
             font-size: 32px;
             font-weight: 700;
@@ -549,7 +549,7 @@
 </head>
 <body>
 
-<!-- ===== MODAL ===== -->
+<!-- ===== MODAL (Only Original Image + Source) ===== -->
 <div class="modal-overlay" id="modal">
     <div class="modal-content">
         <button class="modal-close" id="modalClose">✕</button>
@@ -557,7 +557,6 @@
         <div class="modal-divider"></div>
         <div class="modal-body" id="modalBody">
             <img id="modalScriptureImage" class="modal-scripture-image" src="" alt="典籍原文" style="display:none;">
-            <p id="modalInterpretation" style="margin-top:12px; color:rgba(245,215,66,0.8);"></p>
             <div class="source" id="modalSource">—— 和志武《纳西学论集》</div>
         </div>
     </div>
@@ -584,7 +583,7 @@
         <div class="scroll-hint">⬇ 滑动翻页 ⬇</div>
     </div>
 
-    <!-- PAGE 2: SCENE 1 - 除秽迎新 (SHORT TEXT) -->
+    <!-- PAGE 2: SCENE 1 - 除秽迎新 -->
     <div class="page page-2" id="page2">
         <div class="scene-label">— 除秽迎新 —</div>
         <div class="video-wrapper" id="videoWrapper2" onclick="toggleVideoSound(2)">
@@ -603,7 +602,7 @@
         <div class="scroll-hint">⬇ 滑动翻页 ⬇</div>
     </div>
 
-    <!-- PAGE 3: SCENE 2 - 烧天香祈福 (SHORT TEXT) -->
+    <!-- PAGE 3: SCENE 2 - 烧天香祈福 -->
     <div class="page page-3" id="page3">
         <div class="scene-label">— 烧天香祈福 —</div>
         <div class="video-wrapper" id="videoWrapper3" onclick="toggleVideoSound(3)">
@@ -622,7 +621,7 @@
         <div class="scroll-hint">⬇ 滑动翻页 ⬇</div>
     </div>
 
-    <!-- PAGE 4: SCENE 3 - 祭天敬老 (SHORT TEXT) -->
+    <!-- PAGE 4: SCENE 3 - 祭天敬老 -->
     <div class="page page-5" id="page4">
         <div class="scene-label">— 祭天敬老 —</div>
         <div class="video-wrapper" id="videoWrapper4" onclick="toggleVideoSound(4)">
@@ -662,24 +661,21 @@
 </div>
 
 <script>
-    // ===== POPUP DATA =====
+    // ===== POPUP DATA (Interpretation REMOVED) =====
     const pageData = {
         2: {
             title: '除秽迎新 · 典籍原文',
             scriptureImage: 'original1.jpg',
-            interpretation: 'Interpretation 1 - 待教授补充',
             source: '祭斯蹦祖先仪式：《在斯蹦祖先地住架檀子经》'
         },
         3: {
             title: '烧天香祈福 · 典籍原文',
             scriptureImage: 'original2.jpg',
-            interpretation: 'Interpretation 2 - 待教授补充',
             source: '烧天香仪式 ：《烧天香》'
         },
         4: {
             title: '祭天敬老 · 典籍原文',
             scriptureImage: 'original3.jpg',
-            interpretation: 'Interpretation 3 - 待教授补充',
             source: '祭天仪式：《祭天·用鸡许愿作来年祭牲》'
         }
     };
@@ -730,7 +726,7 @@
         }
     }
 
-    // ===== MODAL FUNCTIONS =====
+    // ===== MODAL FUNCTIONS (Interpretation removed) =====
     function openModal(pageNum) {
         const data = pageData[pageNum];
         if (!data) return;
@@ -743,14 +739,13 @@
             img.style.display = 'block';
             img.onerror = function() {
                 this.style.display = 'none';
-                document.getElementById('modalInterpretation').innerHTML = 
+                document.getElementById('modalSource').innerHTML = 
                     '📷 原图待上传<br><small style="color:rgba(255,255,255,0.4);">请将原图命名为 ' + data.scriptureImage + ' 放入同一文件夹</small>';
             };
         } else {
             img.style.display = 'none';
         }
 
-        document.getElementById('modalInterpretation').innerHTML = data.interpretation || '';
         document.getElementById('modalSource').textContent = '—— ' + data.source;
 
         document.getElementById('modal').classList.add('active');
@@ -795,10 +790,7 @@
     }
 
     // ===== VIDEO MAPPING =====
-    // Page 2 (除秽迎新) → Video2
-    // Page 3 (烧天香祈福) → Video2 (as per client's document)
-    // Page 4 (祭天敬老) → Video3
-    loadVideo(2, 'Video2.mp4');
+    loadVideo(2, 'Video1.mp4');
     loadVideo(3, 'Video2.mp4');
     loadVideo(4, 'Video3.mp4');
 
@@ -819,9 +811,7 @@
     });
 
     console.log('✅ 岁启纳西年 H5 已加载！');
-    console.log('✅ 页面结构: 封面 → 序章 → 除秽迎新 → 烧天香祈福 → 祭天敬老 → 结尾');
-    console.log('✅ 视频映射: Page2→Video2, Page3→Video2, Page4→Video3');
-    console.log('✅ 声音控制: 点击视频或🔇按钮切换声音');
+    console.log('✅ 教授解读已移除，弹窗仅显示原图 + 来源');
 </script>
 
 </body>
