@@ -491,6 +491,27 @@
             font-style: italic;
         }
 
+        /* Interpretation Text Styling */
+        .modal-interpretation {
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px dashed rgba(245, 215, 66, 0.25);
+            color: rgba(245, 240, 232, 0.95);
+            font-size: 17px;
+            line-height: 2.0;
+            text-align: left;
+            letter-spacing: 0.5px;
+        }
+
+        .modal-interpretation-title {
+            color: #f5d742;
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            letter-spacing: 2px;
+            font-style: italic;
+        }
+
         .modal-scripture-image {
             width: 100%;
             max-height: 300px;
@@ -541,6 +562,7 @@
             .sound-toggle { width: 48px; height: 48px; font-size: 20px; }
             .sound-hint { bottom: 68px; font-size: 10px; }
             .prologue-image { max-width: 140px; }
+            .modal-interpretation { font-size: 15px; }
         }
 
         @media (min-width: 600px) {
@@ -555,6 +577,7 @@
             .ending-text { font-size: 28px; max-width: 540px; }
             .prologue-image { max-width: 260px; }
             .sound-toggle { width: 64px; height: 64px; font-size: 28px; }
+            .modal-interpretation { font-size: 19px; }
         }
     </style>
 </head>
@@ -568,6 +591,13 @@
         <div class="modal-divider"></div>
         <div class="modal-body" id="modalBody">
             <img id="modalScriptureImage" class="modal-scripture-image" src="" alt="典籍原文" style="display:none;">
+            
+            <!-- Interpretation Section -->
+            <div class="modal-interpretation" id="modalInterpretationWrap" style="display:none;">
+                <div class="modal-interpretation-title">◆ 教授解读</div>
+                <p id="modalInterpretation"></p>
+            </div>
+
             <div class="source" id="modalSource">—— 和志武《纳西学论集》</div>
         </div>
     </div>
@@ -672,21 +702,24 @@
 </div>
 
 <script>
-    // ===== POPUP DATA =====
+    // ===== POPUP DATA WITH INTERPRETATIONS =====
     const pageData = {
         2: {
             title: '除秽迎新 · 典籍原文',
             scriptureImage: 'original1.jpg',
+            interpretation: '除秽仪式是纳西族净化身心与精神世界的深层仪式，通过清除污秽、恢复平和秩序，承载着"规避污秽、追求清净平安"的生活理念。',
             source: '祭斯蹦祖先仪式：《在斯蹦祖先地住架檀子经》'
         },
         3: {
             title: '烧天香祈福 · 典籍原文',
             scriptureImage: 'original2.jpg',
+            interpretation: '烧天香是以香烟沟通神灵祖先的祭祀祈福仪式，寄托对天地自然的敬畏与感恩，强化村寨与家庭的共同体意识，成为纳西族人日常的精神慰藉。',
             source: '烧天香仪式 ：《烧天香》'
         },
         4: {
             title: '祭天敬老 · 典籍原文',
             scriptureImage: 'original3.jpg',
+            interpretation: '祭天通过严格仪式传承尊老敬祖、和睦家族的伦理价值观，凝聚家族向心力与民族认同，敬天重祖的思想从古至今延续不衰。',
             source: '祭天仪式：《祭天·用鸡许愿作来年祭牲》'
         }
     };
@@ -737,26 +770,36 @@
         }
     }
 
-    // ===== MODAL FUNCTIONS =====
+    // ===== MODAL FUNCTIONS (with Interpretation) =====
     function openModal(pageNum) {
         const data = pageData[pageNum];
         if (!data) return;
 
         document.getElementById('modalTitle').textContent = data.title;
         
+        // Scripture image
         const img = document.getElementById('modalScriptureImage');
         if (data.scriptureImage) {
             img.src = data.scriptureImage;
             img.style.display = 'block';
             img.onerror = function() {
                 this.style.display = 'none';
-                document.getElementById('modalSource').innerHTML = 
-                    '📷 原图待上传<br><small style="color:rgba(255,255,255,0.4);">请将原图命名为 ' + data.scriptureImage + ' 放入同一文件夹</small>';
             };
         } else {
             img.style.display = 'none';
         }
 
+        // Interpretation
+        const interpWrap = document.getElementById('modalInterpretationWrap');
+        const interpText = document.getElementById('modalInterpretation');
+        if (data.interpretation && data.interpretation.trim() !== '') {
+            interpText.textContent = data.interpretation;
+            interpWrap.style.display = 'block';
+        } else {
+            interpWrap.style.display = 'none';
+        }
+
+        // Source
         document.getElementById('modalSource').textContent = '—— ' + data.source;
 
         document.getElementById('modal').classList.add('active');
@@ -801,7 +844,10 @@
     }
 
     // ===== VIDEO MAPPING =====
-    loadVideo(2, 'Video2.mp4');
+    // Page 2 (除秽迎新) → Video1.mp4
+    // Page 3 (烧天香祈福) → Video2.mp4
+    // Page 4 (祭天敬老) → Video3.mp4
+    loadVideo(2, 'Video1.mp4');
     loadVideo(3, 'Video2.mp4');
     loadVideo(4, 'Video3.mp4');
 
@@ -822,8 +868,7 @@
     });
 
     console.log('✅ 岁启纳西年 H5 已加载！');
-    console.log('✅ 声音按钮已增大');
-    console.log('✅ 文本已更新');
+    console.log('✅ 教授解读已添加');
 </script>
 
 </body>
